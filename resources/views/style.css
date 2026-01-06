@@ -1,0 +1,102 @@
+:root {
+    --dark-green: #2e4d41;
+    --light-green: #2cce15;
+    --light-beige: #c7b9aa;
+    --white: #ffffff;
+}
+
+/* التنسيق العام للجسم والخطوط */
+body {
+    background-color: var(--dark-green);
+    font-family: Arial, sans-serif;
+    color: var(--white);
+    margin: 0;
+    padding: 20px;
+    direction: rtl; /* لضمان ظهور النص العربي بشكل صحيح */
+    text-align: center;
+}
+
+/* تنسيق الرأس العلوي */
+.header {
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.shop-button {
+    background-color: var(--light-beige);
+    color: var(--dark-green);
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.shop-button:hover {
+    background-color: #b3a492;
+}
+
+/* تنسيق شبكة الأقسام */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* تنسيق كل بطاقة قسم */
+.card {
+    background-color: var(--light-green);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-content h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: var(--white);
+}
+
+.details-button {
+    background-color: var(--light-beige);
+    color: var(--dark-green);
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.details-button:hover {
+    background-color: #b3a492;
+}
+
+/* تنسيق الشاشة الصغيرة (الجوال) */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* عرض عمود واحد فقط */
+    }
+}

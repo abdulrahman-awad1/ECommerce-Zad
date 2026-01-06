@@ -1,0 +1,53 @@
+:root {
+    --color-white: #ffffff;
+    --color-light-grey: #f0f2f5;
+    --color-dark: #2c3e50;
+    --color-accent-gold: #C8A461;
+    --color-danger: #e74c3c;
+    --color-success: #2ecc71; /* ✅ لون النجاح */
+    --font-main: 'Cairo', sans-serif;
+    --border-color: #e6e9ed;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-main); background-color: var(--color-light-grey); direction: rtl; padding: 40px 20px; }
+
+.container { max-width: 900px; margin: auto; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.header h1 { color: var(--color-dark); border-right: 5px solid var(--color-accent-gold); padding-right: 15px; }
+
+.form-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); }
+
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-dark); }
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 1em;
+}
+
+/* ✅ تنسيق رسالة النجاح */
+.alert-success { 
+    background-color: var(--color-success);
+    color: var(--color-white);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* عرض الصور الحالية */
+.current-images { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; padding: 15px; background: #f9f9f9; border-radius: 8px; }
+.image-wrapper { position: relative; width: 100px; height: 100px; }
+.image-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; }
+
+/* زر حذف الصورة */
+.delete-image-btn { position: absolute; top: -5px; right: -5px; background: var(--color-danger); color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 12px; line-height: 18px; text-align: center; }
+
+.btn-update { background: var(--color-dark); color: white; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; width: 100%; font-size: 1.1em; transition: 0.3s; }
+.btn-update:hover { background: var(--color-accent-gold); color: var(--color-dark); }
+
+.error { color: var(--color-danger); font-size: 0.85em; margin-top: 5px; }
+
+/* تنسيق الأزرار عند الضغط للحذف */
+.image-wrapper.deleted { border: 2px solid var(--color-danger); opacity: 0.5; }
+.image-wrapper.deleted .delete-image-btn { background: var(--color-dark); }
