@@ -6,6 +6,7 @@ use App\Http\Controllers\user\CategoryController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\user\OrderController;
+use App\Http\Controllers\NotificationController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -50,16 +51,9 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 
 
 // رابط قراءة إشعار واحد
-Route::get('/notifications/{id}/read', function($id) {
-    $notification = auth()->user()->notifications()->findOrFail($id);
-    $notification->markAsRead();
-    
-    // توجيه العميل لصفحة الطلبات أو الصفحة الرئيسية
-    return redirect()->route('user.orders'); 
-})->name('notifications.read');
+
+
+Route::get('/notifications/{id}/read', [NotificationController::class, 'read'])->name('notifications.read');
 
 // رابط تحديد الكل كمقروء
-Route::get('/notifications/mark-all-read', function() {
-    auth()->user()->unreadNotifications->markAsRead();
-    return back();
-})->name('notifications.markAllRead');
+Route::get('/notifications/mark-all-read', [NotificationController::class, 'markAllRead'])->name('notifications.markAllRead');

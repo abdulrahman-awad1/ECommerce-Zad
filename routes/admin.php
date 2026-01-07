@@ -3,10 +3,11 @@
 use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\adminHomeController;
 use App\Http\Controllers\admin\AdminOrderController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Room;
 
- 
+
 
 Route::get('/rooms', [RoomController::class, 'index'])->middleware('admin')->name('rooms.index');
 Route::get('room.create',[RoomController::class,'create'])->middleware('admin')->name('create');
@@ -35,8 +36,5 @@ Route::middleware('admin')->group(function () {
       
 });
 
-Route::get('/admin/notifications/{id}/read', function($id) {
-    $notification = auth()->user()->notifications()->findOrFail($id);
-    $notification->markAsRead();
-    return redirect($notification->data['order_id'] ? route('admin.orders.show', $notification->data['order_id']) : back());
-})->name('admin.notifications.read');
+// رابط قراءة إشعارات الأدمن
+Route::get('/admin/notifications/{id}/read', [NotificationController::class, 'adminRead'])->name('admin.notifications.read');
