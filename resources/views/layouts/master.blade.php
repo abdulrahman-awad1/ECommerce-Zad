@@ -49,7 +49,7 @@
             
             <nav class="main-nav">
                 <ul>
-                    <li><a href="{{route('home')}}">الرئيسية</a></li>
+                    <li><a href="{{route('user.home')}}">الرئيسية</a></li>
                     <li><a href="{{route('sections')}}"> الأقسام</a></li>
                     <li><a href="{{route('contact')}}">التواصل</a></li>
                 </ul>
@@ -215,7 +215,7 @@
             <div class="footer-links">
                 <h3 style="margin-bottom: 15px;">روابط سريعة</h3>
                 <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 8px;"><a href="{{route('home')}}" style="color: #ccc; text-decoration: none;">الرئيسية</a></li>
+                    <li style="margin-bottom: 8px;"><a href="{{route('user.home')}}" style="color: #ccc; text-decoration: none;">الرئيسية</a></li>
                     <li style="margin-bottom: 8px;"><a href="{{route('sections')}}" style="color: #ccc; text-decoration: none;">الأقسام</a></li>
                     <li style="margin-bottom: 8px;"><a href="{{route('contact')}}" style="color: #ccc; text-decoration: none;">تواصل معنا</a></li>
                 </ul>

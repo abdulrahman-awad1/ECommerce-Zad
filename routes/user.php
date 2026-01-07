@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('home',[homeController::class,'home'])->name('home');
+Route::get('home',[homeController::class,'home'])->name('user.home');
 Route::get('sections',[homeController::class,'sections'])->name('sections');
 Route::get('contact',[homeController::class,'contact'])->name('contact');
 Route::get('/rooms/search', [homeController::class, 'search'])->name('rooms.search');
