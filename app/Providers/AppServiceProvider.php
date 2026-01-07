@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Cart;
 use App\Services\CartService;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
