@@ -22,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // إجبار الموقع على استخدام HTTPS في الروابط (لحل مشكلة التنسيق)
+    if (config('app.env') === 'production') {
+        URL::forceScheme('https');
+    }
         
         
         View::composer('*', function ($view) {
