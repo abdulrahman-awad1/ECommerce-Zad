@@ -7,6 +7,9 @@ use App\Models\Cart;
 use App\Services\CartService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +29,21 @@ class AppServiceProvider extends ServiceProvider
         // إجبار الموقع على استخدام HTTPS في الروابط (لحل مشكلة التنسيق)
     if (config('app.env') === 'production') {
         URL::forceScheme('https');
+    }
+    try {
+        // نتأكد أولاً أن جدول المستخدمين موجود عشان ميعملش ايرور وقت الـ Migrate
+        if (Schema::hasTable('users')) {
+            User::firstOrCreate(
+                ['email' => 'Admin@email.com'], // بيبحث بالإيميل ده
+                [
+                    'name' => 'Admin',
+                    'password' => Hash::make('StrongPassword12345'),
+                    'role' => 'admin',
+                ]
+            );
+        }
+    } catch (\Exception $e) {
+        // بنسيبها فاضية عشان الموقع ميعطلش لو حصلت مشكلة في الداتابيز
     }
         
         
