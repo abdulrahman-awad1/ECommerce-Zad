@@ -73,11 +73,30 @@
     .specs-table td { padding: 15px; border: 1px solid #eee; }
     .specs-table td:first-child { background: #fcfcfc; font-weight: bold; width: 180px; color: #444; }
 
+    /* ----------------------------------------------------------- */
+    /* التعديلات الجديدة للموبايل (تمت الإضافة ولم يتم الحذف) */
+    /* ----------------------------------------------------------- */
     @media (max-width: 768px) {
-        .product-info-wrapper { flex-direction: column; }
-        .purchase-wrapper { flex-direction: column; align-items: stretch; }
-        .qty-stepper { width: 100%; }
-        .main-image img { height: 350px; }
+        .product-info-wrapper { flex-direction: column; gap: 20px; }
+        .main-image img { height: 280px !important; } /* تصغير الصورة لتناسب شاشة الموبايل بدلا من 500px */
+        .image-slider img { width: 65px; height: 65px; } /* تصغير الصور المصغرة قليلا */
+        
+        .product-title { font-size: 1.5rem !important; margin-bottom: 10px !important; } /* تصغير العنوان الضخم */
+        .price-main { font-size: 1.4rem !important; } /* تصغير السعر */
+        .product-details-text { font-size: 0.95rem !important; margin-bottom: 20px !important; }
+        
+        /* جعل الكمية وزر السلة بجانب بعض بدلا من تحت بعض لتوفير مساحة */
+        .purchase-wrapper { flex-direction: row !important; align-items: center; gap: 10px; }
+        .qty-stepper { width: 110px !important; height: 45px !important; }
+        .add-to-cart-btn-new { height: 45px !important; font-size: 1rem !important; }
+        .qty-group label { margin-bottom: 5px !important; font-size: 0.8rem; }
+        .purchase-container { padding: 15px !important; }
+
+        .whatsapp-cta { padding: 10px !important; font-size: 0.9rem !important; }
+        
+        .product-tabs-section { margin-top: 30px; }
+        .tabs-nav { gap: 15px; }
+        .tab-button { font-size: 0.9rem; }
     }
 </style>
 @endpush

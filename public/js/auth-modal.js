@@ -60,3 +60,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // دالة المبادرة (تستدعى من HTML للتعامل مع أخطاء Laravel)
    
 });
+

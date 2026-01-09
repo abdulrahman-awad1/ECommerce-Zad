@@ -1354,3 +1354,22 @@ main {
         gap: 15px;
     }
 }
+
+        /* تنسيقات إضافية للإشعارات */
+        .notifications-wrapper { position: relative; margin-left: 15px; }
+        .notif-btn { background: none; border: none; font-size: 1.4rem; color: var(--color-primary); cursor: pointer; position: relative; }
+        .notif-count { position: absolute; top: -5px; right: -8px; background: #e74c3c; color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; border: 2px solid #white; }
+        
+        .notif-dropdown { 
+            position: absolute; top: 45px; left: 0; width: 280px; background: white; 
+            border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            display: none; z-index: 1000; border: 1px solid #eee; overflow: hidden;
+        }
+        .notifications-wrapper:hover .notif-dropdown { display: block; }
+        
+        .notif-header { padding: 10px 15px; background: #f9f9f9; border-bottom: 1px solid #eee; font-weight: bold; font-size: 0.9em; }
+        .notif-item { padding: 12px 15px; border-bottom: 1px solid #f1f1f1; display: block; text-decoration: none; color: #333; transition: 0.3s; }
+        .notif-item:hover { background: #fcfaf5; }
+        .notif-item p { margin: 0; font-size: 0.85em; line-height: 1.4; }
+        .notif-item small { color: #999; font-size: 0.75em; display: block; margin-top: 5px; }
+        .empty-notif { padding: 20px; text-align: center; color: #bbb; font-size: 0.9em; }
