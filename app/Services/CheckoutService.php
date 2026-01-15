@@ -43,6 +43,10 @@ class CheckoutService
                     'order_id' => $order->id,
                     'room_id' => $item->room_id,
                     'room_name' => $item->room->room_name,
+                    'room_image' => ($item && $item->images && $item->images->first())
+    ? asset('images/uploads/' . $item->images->first()->image_path)
+    : asset('images/no-image.jpg'),
+
                     'price' => $item->room->price,
                     'quantity' => $item->quantity,
                     'total' => $item->room->price * $item->quantity,

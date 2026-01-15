@@ -32,6 +32,7 @@ class AuthService
         }
 
         request()->session()->regenerate();
+        request()->session()->regenerateToken();
     }
 
     public function logout(): void

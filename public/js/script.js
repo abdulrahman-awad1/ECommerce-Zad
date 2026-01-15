@@ -85,20 +85,17 @@ function closeAlertNow() {
  */
 document.addEventListener('DOMContentLoaded', function() {
     const alertElement = document.getElementById('successAlert');
-    if (!alertElement) return;
+    const progressBar = alertElement ? alertElement.querySelector('.progress-bar') : null;
 
-    setTimeout(() => {
-        alertElement.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-        alertElement.style.opacity = '0';
-        alertElement.style.transform = "translateY(-20px)";
-        setTimeout(() => alertElement.remove(), 600);
-    }, 3000);
-});
+    if (alertElement) {
+        // 1. تشغيل أنيميشن شريط التقدم عبر CSS (لو موجود)
+        if (progressBar) {
+            progressBar.style.transition = "width 5s linear";
+            progressBar.style.width = "0%";
+        }
 
-// منع ظهور الرسالة عند الضغط Back
-window.addEventListener('pageshow', function(event) {
-    if (event.persisted) {
-        const alert = document.getElementById('successAlert');
-        if (alert) alert.remove();
+        // 2. إغلاق التنبيه بعد 5 ثوانٍ
+        setTimeout(closeAlertNow, 3000);
     }
+    
 });

@@ -74,11 +74,15 @@
                 <div class="order-body">
                     @foreach($order->items as $item)
                         <div class="order-item">
-                            <img src="{{ $item->room->images->first()->image_path
-                                ? asset('images/uploads/' . $item->room->images->first()->image_path)
-                                : asset('images/no-image.jpg') }}" alt="Product">
+                        <img src="{{ $item->room?->images?->first()?->image_path
+            ? asset('images/uploads/' . $item->room->images->first()->image_path)
+            : asset('images/no-image.jpg') }}"
+     class="product-img"
+     alt="{{ $item->room?->room_name ?? 'No Name' }}">
+
+
                             <div>
-                                <b style="font-weight: bold; color: #333;">{{ $item->room->room_name }}</b>
+                                <b style="font-weight: bold; color: #333;">{{ $item->room_name }}</b>
                                 <span style="font-size: 0.85rem; color: #777; display: block;">
                                     الكمية: {{ $item->quantity }} | {{ number_format($item->price) }} ج.م
                                 </span>

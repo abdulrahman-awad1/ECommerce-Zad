@@ -188,9 +188,9 @@
                             <div class="featured-tag">مميز</div>
                         @endif
 
-                        @if($room->is_discounted)
-                            <div class="discount-tag">خصم {{ $room->discount_percent }}%</div>
-                        @endif
+                        @if($room->discount > 0)
+                                    <span class="price-old">{{number_format($room->price + $room->discount) }}</span>
+                                @endif
 
                         <img src="{{ asset('images/uploads/' . ($room->images->first()->image_path ?? 'default.jpg')) }}" alt="{{ $room->room_name }}">
                     </div>
