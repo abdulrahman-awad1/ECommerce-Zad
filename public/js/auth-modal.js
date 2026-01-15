@@ -53,6 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
             modalTitle.textContent = 'تسجيل جديد';
         }
     };
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
 
     loginTabBtn.addEventListener('click', () => switchAuthMode('login'));
     registerTabBtn.addEventListener('click', () => switchAuthMode('register'));

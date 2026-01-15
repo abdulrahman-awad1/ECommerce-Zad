@@ -124,13 +124,7 @@
                 </div>
             </div>
 
-            <div class="info-item">
-                <i class="fas fa-envelope"></i>
-                <div>
-                    <h4 style="font-size: 1rem;">البريد الإلكتروني</h4>
-                    <p style="color: var(--color-text-muted); font-size: 0.9rem;">info@zad-furniture.com</p>
-                </div>
-            </div>
+           
 
             <div class="info-item">
                 <i class="fas fa-clock"></i>

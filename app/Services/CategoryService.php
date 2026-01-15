@@ -1,36 +1,34 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\Category;
-use App\Models\Room;
+use App\Services\RoomPricingService;
+use App\Services\Presenters\RoomPresenter;
 
 class CategoryService
 {
-    public function roomsByCategory(Category $category): array
+    public function __construct(
+        private RoomPricingService $pricingService,
+        private RoomPresenter $presenter
+    ) {}
+
+    public function roomsByCategory(Category $category)
     {
-        $rooms = $category->rooms()->where('is_published', true)
-        ->with(['images','category'])
-        ->get()
-        ->map(function ($room) {
-            $room->main_image = $this->mainImage($room);
-            return $room;
+        return $category->rooms()
+            ->where('is_published', true)
+            ->with(['images','category'])
+            ->get();
+    }
+
+    public function formattedRooms(Category $category)
+    {
+        $rooms = $this->roomsByCategory($category);
+
+        return $rooms->map(function ($room) {
+            $pricing = $this->pricingService->format($room);
+            
+            return $this->presenter->present($room, $pricing);
         });
-        $category_name = $category ? $category->name : 'قسم غير معروف';
-
-    return [
-        'category' => $category,
-        'rooms' => $rooms,
-        'category_name' =>$category_name
-    ];
-}
-
-public function mainImage($room): string
-    {
-        if ($room->images && $room->images->count()) {
-            return asset('images/uploads/' . $room->images->first()->image_path);
-        }
-
-        return asset('images/no-image.jpg');
-    
     }
 }

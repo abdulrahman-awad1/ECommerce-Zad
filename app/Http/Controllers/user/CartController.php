@@ -11,89 +11,36 @@ use App\Services\RoomService;
 
 class CartController extends Controller
 {
-    public function add(Request $request, CartService $cartService)
+    public function index(CartService $cart)
     {
-        $roomId = $request->room_id;
-        $qty = $request->qty ?? 1;
-
-        $room = Room::findOrFail($roomId);
-
-        $cartToken = $cartService->getCartToken();
-
-        $cartItem = Cart::where('cart_token', $cartToken)
-            ->where('room_id', $room->id)
-            ->first();
-
-        if ($cartItem) {
-            $cartItem->quantity += $qty;
-            $cartItem->save();
-        } else {
-            Cart::create([
-                'cart_token' => $cartToken,
-                'room_id'    => $room->id,
-                'price'      => $room->price,
-                'quantity'   => $qty,
-            ]);
-        }
-
-        return back()->with('success', 'تمت الإضافة إلى السلة');
-    }
-
-    public function index(CartService $cartService )
-    {
-        $price = $cartService->getFormattedItems();
-        $items = $cartService->getCartItems();
-    
-        $total = $items->sum(function ($item) {
-            return $item->room->price * $item->quantity;
-        });
-    
         return view('user.cart', [
-            'price' => $price,
-            'items' => $items,
-            'total' => $total,
-            'isEmpty' => $items->isEmpty(),
+            'items' => $cart->items(),
+            'total' => $cart->total(),
+            'isEmpty' => $cart->isEmpty(),
         ]);
     }
+
+    public function add(Request $request, CartService $cart)
+    {
+        $cart->add($request->room_id, $request->qty ?? 1);
+        return redirect()
+        ->route('cart.index')
+        ->with('success', 'تمت الإضافة إلى السلة');
     
-    
+    }
 
-    public function update(Request $request, CartService $cartService)
-{
-    $request->validate([
-        'cart_id'  => 'required|exists:cart,id',
-        'quantity' => 'required|integer|min:1'
-    ]);
+    public function update(Request $request, CartService $cart)
+    {
+        $cart->updateQuantity($request->cart_id, $request->quantity);
 
-    $cartToken = $cartService->getCartToken();
+        return redirect(url()->previous())->with('success', 'تم تحديث الكمية');
+    }
 
-    Cart::where('id', $request->cart_id)
-        ->where('cart_token', $cartToken)
-        ->update([
-            'quantity' => $request->quantity
-        ]);
+    public function remove(Request $request, CartService $cart)
+    {
+        $cart->remove($request->cart_id);
 
-    return back()->with('success', 'تم تحديث الكمية');
+        return redirect(url()->previous())->with('success', 'تم الحذف من السلة');
+    }
 }
 
-
-
-public function remove(Request $request, CartService $cartService)
-{
-    $request->validate([
-        'cart_id' => 'required|exists:cart,id'
-    ]);
-
-    $cartToken = $cartService->getCartToken();
-
-    Cart::where('id', $request->cart_id)
-        ->where('cart_token', $cartToken)
-        ->delete();
-
-    return back()->with('success', 'تم الحذف من السلة');
-}
-
-
-
-
-}

@@ -207,8 +207,8 @@
                         <form action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             <input type="hidden" name="room_id" value="{{ $room->id }}">
-                            <button type="submit" class="add-to-cart-btn">
-                                <i class="fas fa-shopping-basket"></i> أضف للسلة
+                            <button type="submit" class="cta-btn" style="padding: 10px 20px; font-size: 0.9em; border: none; cursor: pointer; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                                <i class="fas fa-shopping-basket"></i> أضف للعربة
                             </button>
                         </form>
                     </div>

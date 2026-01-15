@@ -134,9 +134,11 @@
                             <div class="featured-tag">مميز</div>
                         @endif
 
-                        @if($room->is_discounted)
-                            <div class="discount-tag">خصم {{ $room->discount_percent }}%</div>
-                        @endif
+                        @if($room->discount > 0)
+                                 <div class="discount-tag">
+                                    خصم {{ round(($room->discount / ($room->price + $room->discount)) * 100) }}%
+                                 </div>
+                            @endif
 
                         <img src="{{ asset('images/uploads/' . ($room->images->first()->image_path ?? 'default.jpg')) }}" alt="{{ $room->room_name }}">
                     </div>
@@ -149,12 +151,13 @@
                         <div class="price-row">
                             <span class="price-main">{{ number_format($room->price) }} ج.م</span>
 
-                            @if($room->price)
-                                <span class="price-old">{{number_format($room->price + $room->discount) }}</span>
-                            @endif
+                            @if($room->discount > 0)
+                                    <span class="price-old">{{number_format($room->price + $room->discount) }}</span>
+                                @endif
                         </div>
                         <form action="{{ route('cart.add') }}" method="POST" style="margin: 0; padding: 0;">
                             @csrf
+                            <input type="hidden" name="redirect_to" value="{{ url()->current() }}">
                             <input type="hidden" name="room_id" value="{{ $room->id }}">
                             
                             <button type="submit" class="cta-btn" style="padding: 10px 20px; font-size: 0.9em; border: none; cursor: pointer; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">

@@ -137,8 +137,8 @@
 
             <p class="product-details-text">{{ $room->description }}</p>
 
-            <a href="https://wa.me/201XXXXXXXXX?text=استفسار عن: {{ $room->room_name }}" target="_blank" class="whatsapp-cta">
-                <i class="fab fa-whatsapp"></i> تواصل معنا للاستفسار عن السعر
+            <a href="https://wa.me/+201000408109" target="_blank" class="whatsapp-cta">
+                <i class="fab fa-whatsapp"></i> تواصل معنا
             </a>
 
             {{-- فورم الشراء والكمية --}}
@@ -165,35 +165,7 @@
     </div>
 
     {{-- التابات للمواصفات --}}
-    <div class="product-tabs-section">
-        <div class="tabs-nav">
-            <div class="tab-button active" onclick="switchTab(event, 'info')">الوصف والتفاصيل</div>
-            <div class="tab-button" onclick="switchTab(event, 'specs')">المواصفات الفنية</div>
-        </div>
-
-        <div id="info" class="tab-content active">
-            <div class="bg-light p-4 rounded">
-                <p style="white-space: pre-line; color: #555;">{{ $room->description }}</p>
-            </div>
-        </div>
-
-        <div id="specs" class="tab-content">
-            <table class="specs-table">
-                <tr>
-                    <td>المواد الأساسية:</td>
-                    <td>{{ $room->material ?? 'خشب زان طبيعي' }}</td>
-                </tr>
-                <tr>
-                    <td>بلد المنشأ:</td>
-                    <td>صناعة وطنية فاخرة</td>
-                </tr>
-                <tr>
-                    <td>الضمان:</td>
-                    <td>متوفر ضمان ضد عيوب الصناعة</td>
-                </tr>
-            </table>
-        </div>
-    </div>
+    
 </main>
 @endsection
 

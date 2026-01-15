@@ -12,48 +12,31 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('home',[homeController::class,'home'])->name('user.home');
+Route::get('home',[homeController::class,'home'])->middleware('no.back.cache')->name('user.home');
 Route::get('sections',[homeController::class,'sections'])->name('sections');
 Route::get('contact',[homeController::class,'contact'])->name('contact');
-Route::get('/rooms/search', [homeController::class, 'search'])->name('rooms.search');
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('/all_rooms', [RoomController::class, 'index'])->name('all_rooms');   
-Route::get('/show_room/{id}', [RoomController::class, 'show'])->name('show_room');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->middleware('no.back.cache')->name('categories.show');
+Route::get('/all_rooms', [RoomController::class, 'index'])->middleware('no.back.cache')->name('all_rooms');   
+Route::get('/show_room/{id}', [RoomController::class, 'show'])->middleware('no.back.cache')->name('show_room');
 Route::get('/ajax-search', [RoomController::class, 'ajaxSearch'])->name('rooms.ajax.search');
 
     
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart', [CartController::class, 'index'])->middleware('no.back.cache')->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
     
-// عرض صفحة الدفع
-// Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
-
-// // معالجة الدفع (مثال: تأكيد الطلب)
-// Route::post('/checkout', [CartController::class, 'processCheckout'])->name('cart.processCheckout');
 
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('no.back.cache')->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/order-success/{order}', [CheckoutController::class, 'orderSuccess'])->name('order.success');
+Route::post('/order-success/{order}', [CheckoutController::class, 'orderRegistration'])->name('order.registration');
 
-
-//Route::middleware(['auth'])->group(function () {
-    Route::get('/my-orders', [OrderController::class, 'index'])->middleware('auth-user')->name('user.orders');
+Route::get('/my-orders', [OrderController::class, 'index'])->middleware('auth-user')->name('user.orders');
+Route::delete('/my-orders/{id}/cancel', [OrderController::class, 'cancel'])->middleware('auth-user')->name('user.orders.cancel');
     
-    // مسار إلغاء (حذف) الطلب
-    Route::delete('/my-orders/{id}/cancel', [OrderController::class, 'cancel'])->name('user.orders.cancel');
-    
-    // مسار تعديل الطلب (اختياري: يمكن توجيهه لصفحة تعرض الطلب مرة أخرى)
-    Route::get('/my-orders/{id}/edit', [OrderController::class, 'edit'])->name('user.orders.edit');
-//});
-
-
-
-// رابط قراءة إشعار واحد
-
+   
 
 Route::get('/notifications/{id}/read', [NotificationController::class, 'read'])->name('notifications.read');
-
-// رابط تحديد الكل كمقروء
 Route::get('/notifications/mark-all-read', [NotificationController::class, 'markAllRead'])->name('notifications.markAllRead');

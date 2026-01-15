@@ -106,7 +106,7 @@
 
                     <div class="card-body">
 
-                        <span class="room-name">{{ $room->room_name }}</span>
+                        <span class="room-name">{{$room->room_name}}</span>
                         <p class="room-desc">{{ $room->description }}</p>
 
                         <div class="price-row">
@@ -119,6 +119,8 @@
                         <form action="{{ route('cart.add') }}" method="POST" style="margin: 0; padding: 0;">
                             @csrf
                             <input type="hidden" name="room_id" value="{{ $room->id }}">
+                            <input type="hidden" name="redirect_to" value="{{ url()->current() }}">
+
                             
                             <button type="submit" class="cta-btn" style="padding: 10px 20px; font-size: 0.9em; border: none; cursor: pointer; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
                                 <i class="fas fa-shopping-basket"></i> أضف للعربة

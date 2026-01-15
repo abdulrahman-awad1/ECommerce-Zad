@@ -114,3 +114,33 @@ function toggleSideCart() {
     }
 }
 
+function setupAlertAutoDismiss() {
+    const alertElement = document.getElementById('successAlert');
+    if (!alertElement) return;
+
+    // حذف الصفحة الحالية من الـ history لمنع Back cache من إعادة الرسالة
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+
+    // اختفاء الرسالة بعد 4 ثواني
+    setTimeout(() => {
+        alertElement.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        alertElement.style.opacity = "0";
+        alertElement.style.transform = "translateY(-20px)";
+        setTimeout(() => {
+            alertElement.remove();
+        }, 600);
+    }, 4000);
+}
+
+// تشغيل الوظيفة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', setupAlertAutoDismiss);
+
+// إزالة أي flash message إذا رجع المستخدم عبر Back/Forward Cache
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        const alertElement = document.getElementById('successAlert');
+        if (alertElement) alertElement.remove();
+    }
+});

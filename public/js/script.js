@@ -67,3 +67,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+function closeAlertNow() {
+    const alertElement = document.getElementById('successAlert');
+    if (alertElement) {
+        alertElement.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        alertElement.style.opacity = "0";
+        alertElement.style.transform = "translateX(50px)"; // حركة جانبية بسيطة للديسك توب
+        
+        setTimeout(() => {
+            alertElement.remove();
+        }, 600);
+    }
+}
+
+/**
+ * إعداد الإخفاء التلقائي وشريط التقدم
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    const alertElement = document.getElementById('successAlert');
+    if (!alertElement) return;
+
+    setTimeout(() => {
+        alertElement.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        alertElement.style.opacity = '0';
+        alertElement.style.transform = "translateY(-20px)";
+        setTimeout(() => alertElement.remove(), 600);
+    }, 3000);
+});
+
+// منع ظهور الرسالة عند الضغط Back
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        const alert = document.getElementById('successAlert');
+        if (alert) alert.remove();
+    }
+});

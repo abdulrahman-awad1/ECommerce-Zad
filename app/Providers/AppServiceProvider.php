@@ -26,31 +26,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // إجبار الموقع على استخدام HTTPS في الروابط (لحل مشكلة التنسيق)
+       
     if (config('app.env') === 'production') {
         URL::forceScheme('https');
     }
-    try {
-        // نتأكد أولاً أن جدول المستخدمين موجود عشان ميعملش ايرور وقت الـ Migrate
-        if (Schema::hasTable('users')) {
-            User::firstOrCreate(
-                ['email' => 'Admin@email.com'], // بيبحث بالإيميل ده
-                [
-                    'name' => 'Admin',
-                    'password' => Hash::make('StrongPassword12345'),
-                    'role' => 'admin',
-                ]
-            );
-        }
-    } catch (\Exception $e) {
-        // بنسيبها فاضية عشان الموقع ميعطلش لو حصلت مشكلة في الداتابيز
-    }
+   
         
         
         View::composer('*', function ($view) {
             $cartService = app(\App\Services\CartService::class);
         
-            $items = $cartService->getCartItems();
+            $items = $cartService->items();
         
             $view->with([
                 'cartItems' => $items,

@@ -149,9 +149,11 @@
                 <div style="padding: 10px; background: #f8f9fa; border-bottom: 1px solid #eee; font-weight: bold; font-size: 0.9rem;">التنبيهات</div>
                 <div style="max-height: 300px; overflow-y: auto;">
                     @forelse(auth()->user()->unreadNotifications as $notification)
+                    <a href="{{ route('notifications.read', $notification->id) }}" >
                         <div style="padding: 12px; border-bottom: 1px solid #f9f9f9; font-size: 0.85rem;">
                             {{ $notification->data['message'] ?? 'تنبيك جديد' }}
                         </div>
+                        </a>
                     @empty
                         <div style="padding: 20px; text-align: center; color: #999; font-size: 0.85rem;">لا توجد تنبيهات جديدة</div>
                     @endforelse
@@ -224,13 +226,14 @@
 }
 </style>
 
-    @if(session('success'))
+@if(session('success'))
     <div class="custom-alert success-alert" id="successAlert" style="position: fixed; top: 70px; left: 10px; right: 10px; z-index: 1001;">
         <div class="alert-content">
             <div class="alert-text"><span>{{ session('success') }}</span></div>
         </div>
     </div>
-    @endif
+    
+@endif
 
     <main>
         @yield('content')

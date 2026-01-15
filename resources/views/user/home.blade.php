@@ -132,8 +132,9 @@
                                     <span class="price-old">{{number_format($room->price + $room->discount) }}</span>
                                 @endif
                             </div>
-                            <form action="{{ route('cart.add') }}" method="POST" style="margin: 0; padding: 0;">
+                            <form id="addToCartForm" action="{{ route('cart.add') }}" method="POST" style="margin: 0; padding: 0;">
                                 @csrf
+                                <input type="hidden" name="redirect_to" value="{{ url()->current() }}">
                                 <input type="hidden" name="room_id" value="{{ $room->id }}">
                                 <button type="submit" class="cta-btn" style="padding: 10px 20px; font-size: 0.9em; border: none; cursor: pointer; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
                                     <i class="fas fa-shopping-basket"></i> أضف للعربة

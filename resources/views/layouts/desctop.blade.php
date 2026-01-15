@@ -172,15 +172,17 @@
     </div>
     
     @if(session('success'))
-    <div class="custom-alert success-alert" id="successAlert">
-        <div class="alert-content">
-            <div class="alert-icon"><i class="fas fa-check-circle"></i></div>
-            <div class="alert-text"><span>{{ session('success') }}</span></div>
-            <button class="close-alert" onclick="this.parentElement.parentElement.remove()"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="progress-bar"></div>
+<div class="custom-alert success-alert" id="successAlert">
+    <div class="alert-content">
+        <div class="alert-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="alert-text"><span>{{ session('success') }}</span></div>
+        <button class="close-alert" onclick="this.parentElement.parentElement.remove()">
+            <i class="fas fa-times"></i>
+        </button>
     </div>
-    @endif
+</div>
+@endif
+
 
     <main>
         @yield('content')
