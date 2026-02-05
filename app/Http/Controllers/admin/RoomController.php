@@ -15,6 +15,7 @@ class RoomController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Room::class);
         return view('admin.index', [
             'rooms' => Room::with('images')->get()
         ]);
@@ -22,6 +23,8 @@ class RoomController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Room::class);
+
         return view('admin.create');
     }
 
@@ -30,6 +33,7 @@ class RoomController extends Controller
         RoomService $roomService,
         ImageService $imageService
         ) {
+            $this->authorize('create', Room::class);
 
             $room = $roomService->create($request->validated());
             $imageService->storeMany(
@@ -42,6 +46,8 @@ class RoomController extends Controller
     }
     public function show(Room $room)
     {
+        $this->authorize('view', $room);
+
         $room->load(['images', 'category']);
 
         return view('admin.show', compact('room'));
@@ -49,6 +55,7 @@ class RoomController extends Controller
 
     public function edit(Room $room)
     {
+        $this->authorize('update', $room);
         return view('admin.edit', compact('room'));
     }
 
@@ -58,7 +65,7 @@ class RoomController extends Controller
         RoomService $roomService,
         ImageService $imageService
     ) {
-        // جمع البيانات من الريكويست
+        $this->authorize('update', $room);
         $data = $request->validated();
     
         // معالجة الـ checkboxes
@@ -94,6 +101,8 @@ class RoomController extends Controller
 
     public function destroy(Room $room, RoomService $service)
     {
+        $this->authorize('delete', $room);
+
         $service->delete($room);
 
         return redirect()->route('rooms.index')->with('success', 'تم حذف الغرفة بنجاح');
