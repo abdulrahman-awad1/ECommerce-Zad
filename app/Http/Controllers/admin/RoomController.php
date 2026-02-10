@@ -9,10 +9,14 @@ use App\Models\Image;
 use App\Models\Room;
 use App\Services\RoomService;
 use App\Services\ImageService;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 
 class RoomController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index()
     {
         $this->authorize('viewAny', Room::class);
